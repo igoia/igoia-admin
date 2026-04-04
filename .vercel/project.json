@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_iNiP92Cs1R3qxWo29T4mcKcDhm3U",
+  "orgId": "team_t6INOh57ohttmb9Vfbnkb8M7",
+  "projectName": "igoia-admin",
+  "settings": {
+    "createdAt": 1775153563310,
+    "framework": "vite",
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}
