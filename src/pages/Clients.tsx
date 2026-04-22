@@ -164,6 +164,14 @@ export default function Clients({ clients, onRefresh, onViewBot, showHeader }: P
                   {fmtDate(client.created_at)}
                 </td>
                 <td>
+  <button
+    onClick={() => onViewBot(client.id, client.business_name)}
+    style={{ fontSize: 12, padding: '4px 10px', cursor: 'pointer' }}
+  >
+    📊 Bot
+  </button>
+</td>
+                <td>
                   <button
                     onClick={() => onViewBot(client.id, client.business_name)}
                     className="btn btn-secondary"
