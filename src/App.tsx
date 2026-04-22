@@ -24,3 +24,5 @@ export default function App() {
 
   return session ? <Dashboard session={session} /> : <Login />
 }
+
+// v2.0
