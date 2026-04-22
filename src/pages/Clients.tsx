@@ -45,7 +45,7 @@ export default function Clients({ clients, onRefresh, onViewBot, showHeader }: P
       <div className="table-container">
         <table className="data-table">
           <thead>
-            <tr><th>EMPRESA</th><th>RUT</th><th>PLAN</th><th>ESTADO</th><th>MRR</th><th>EMAIL</th><th>TELEFONO</th><th>REGISTRADO</th><th>BOT METRICAS</th></tr>
+            <tr><th>EMPRESA</th><th>RUT</th><th>PLAN</th><th>ESTADO</th><th>MRR</th><th>EMAIL</th><th>TELEFONO</th><th>REGISTRADO</th><th>BOT</th><th>BOT METRICAS</th></tr>
           </thead>
           <tbody>
             {filtered.map((client) => (
@@ -57,7 +57,7 @@ export default function Clients({ clients, onRefresh, onViewBot, showHeader }: P
                 <td style={{ fontWeight: 600 }}>{fmtCLP(PLAN_PRICE[client.plan]||0)}</td>
                 <td style={{ fontSize: 13 }}>{client.email}</td>
                 <td style={{ fontSize: 13 }}>{client.phone||'--'}</td>
-                <td style={{ fontSize: 13 }}>{fmtDate(client.created_at)}</td>
+                <td style={{ fontSize: 13 }}>{fmtDate(client.created_at)}</td><td><button onClick={() => onViewBot && onViewBot(client.id, client.business_name)} style={{background:'#059669',color:'white',border:'none',borderRadius:6,padding:'4px 12px',cursor:'pointer',fontSize:12}}>Ver Bot</button></td>
                 <td><button onClick={() => onViewBot && onViewBot(client.id, client.business_name)} style={{ background:'#059669', color:'white', border:'none', borderRadius:6, padding:'4px 12px', cursor:'pointer', fontSize:12 }}>Ver Bot</button></td>
               </tr>
             ))}
