@@ -18,35 +18,42 @@ export default function Clients({ clients, onRefresh, onViewBot, showHeader }: P
   const [search, setSearch] = useState('')
   const [filterPlan, setFilterPlan] = useState('all')
   const [filterStatus, setFilterStatus] = useState('all')
-
   const filtered = clients.filter((c) => {
     const q = search.toLowerCase()
-    return (!q || c.business_name.toLowerCase().includes(q) || (c.email||'').toLowerCase().includes(q) || (c.rut||'').toLowerCase().includes(q)) &&
+    return (!q || c.business_name.toLowerCase().includes(q) || (c.email||'').toLowerCase().includes(q)) &&
       (filterPlan === 'all' || c.plan === filterPlan) &&
       (filterStatus === 'all' || c.status === filterStatus)
   })
-
   return (
     <div>
-      {showHeader && <div className="page-header"><div><h1 className="page-title">Clientes</h1><p className="page-subtitle">Gestion IGoIA</p></div></div>}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
-        <h2 style={{ fontSize: 16, fontWeight: 600, color: '#374151' }}>Clientes {filtered.length} resultados</h2>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-          <input type="text" placeholder="Buscar empresa, email, RUT..." value={search} onChange={(e) => setSearch(e.target.value)} className="search-input" style={{ minWidth: 220 }} />
+      {showHeader && <div className="page-header"><h1 className="page-title">Clientes</h1></div>}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, gap: 8, flexWrap: 'wrap' }}>
+        <h2 style={{ fontSize: 16, fontWeight: 600 }}>Clientes {filtered.length}</h2>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <input type="text" placeholder="Buscar..." value={search} onChange={(e) => setSearch(e.target.value)} className="search-input" />
           <select value={filterPlan} onChange={(e) => setFilterPlan(e.target.value)} className="filter-select">
-            <option value="all">Todos los planes</option><option value="trial">Trial</option><option value="starter">Starter</option><option value="business">Business</option><option value="scale">Scale</option>
+            <option value="all">Todos los planes</option>
+            <option value="trial">Trial</option>
+            <option value="starter">Starter</option>
+            <option value="business">Business</option>
+            <option value="scale">Scale</option>
           </select>
           <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="filter-select">
-            <option value="all">Todos los estados</option><option value="trial">Trial</option><option value="active">Activo</option><option value="suspended">Suspendido</option><option value="cancelled">Cancelado</option>
+            <option value="all">Todos los estados</option>
+            <option value="trial">Trial</option>
+            <option value="active">Activo</option>
+            <option value="suspended">Suspendido</option>
+            <option value="cancelled">Cancelado</option>
           </select>
-          <button onClick={onRefresh} className="btn btn-secondary" title="Actualizar">Actualizar</button>
+          <button onClick={onRefresh} className="btn btn-secondary">Actualizar</button>
         </div>
       </div>
       <div className="table-container">
         <table className="data-table">
-          <thead>
-            <tr><th>EMPRESA</th><th>RUT</th><th>PLAN</th><th>ESTADO</th><th>MRR</th><th>EMAIL</th><th>TELEFONO</th><th>REGISTRADO</th><th>BOT</th><th>BOT METRICAS</th></tr>
-          </thead>
+          <thead><tr>
+            <th>EMPRESA</th><th>RUT</th><th>PLAN</th><th>ESTADO</th>
+            <th>MRR</th><th>EMAIL</th><th>TEL</th><th>REGISTRO</th><th>BOT</th>
+          </tr></thead>
           <tbody>
             {filtered.map((client) => (
               <tr key={client.id}>
@@ -57,7 +64,7 @@ export default function Clients({ clients, onRefresh, onViewBot, showHeader }: P
                 <td style={{ fontWeight: 600 }}>{fmtCLP(PLAN_PRICE[client.plan]||0)}</td>
                 <td style={{ fontSize: 13 }}>{client.email}</td>
                 <td style={{ fontSize: 13 }}>{client.phone||'--'}</td>
-                <td style={{ fontSize: 13 }}>{fmtDate(client.created_at)}</td><td><button onClick={() => onViewBot && onViewBot(client.id, client.business_name)} style={{background:'#059669',color:'white',border:'none',borderRadius:6,padding:'4px 12px',cursor:'pointer',fontSize:12}}>Ver Bot</button></td>
+                <td style={{ fontSize: 13 }}>{fmtDate(client.created_at)}</td>
                 <td><button onClick={() => onViewBot && onViewBot(client.id, client.business_name)} style={{ background:'#059669', color:'white', border:'none', borderRadius:6, padding:'4px 12px', cursor:'pointer', fontSize:12 }}>Ver Bot</button></td>
               </tr>
             ))}
