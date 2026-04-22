@@ -6,7 +6,7 @@ const PLAN_LABEL: Record<string, string> = {
   starter: 'Starter',
   business: 'Business',
   scale: 'Scale',
-}
+} 
 
 const STATUS_LABEL: Record<string, string> = {
   trial: 'Trial',
