@@ -18,17 +18,19 @@ export default function Clients({ clients, onRefresh, onViewBot, showHeader }: P
   const [search, setSearch] = useState('')
   const [filterPlan, setFilterPlan] = useState('all')
   const [filterStatus, setFilterStatus] = useState('all')
+
   const filtered = clients.filter((c) => {
     const q = search.toLowerCase()
     return (!q || c.business_name.toLowerCase().includes(q) || (c.email||'').toLowerCase().includes(q)) &&
       (filterPlan === 'all' || c.plan === filterPlan) &&
       (filterStatus === 'all' || c.status === filterStatus)
   })
+
   return (
     <div>
-      {showHeader && <div className="page-header"><h1 className="page-title">Clientes</h1></div>}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, gap: 8, flexWrap: 'wrap' }}>
-        <h2 style={{ fontSize: 16, fontWeight: 600 }}>Clientes {filtered.length}</h2>
+      {showHeader && <div className="page-header"><div><h1 className="page-title">Clientes</h1></div></div>}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, gap: 8 }}>
+        <h2 style={{ fontSize: 16, fontWeight: 600 }}>Clientes {filtered.length} resultados</h2>
         <div style={{ display: 'flex', gap: 8 }}>
           <input type="text" placeholder="Buscar..." value={search} onChange={(e) => setSearch(e.target.value)} className="search-input" />
           <select value={filterPlan} onChange={(e) => setFilterPlan(e.target.value)} className="filter-select">
@@ -50,10 +52,11 @@ export default function Clients({ clients, onRefresh, onViewBot, showHeader }: P
       </div>
       <div className="table-container">
         <table className="data-table">
-          <thead><tr>
-            <th>EMPRESA</th><th>RUT</th><th>PLAN</th><th>ESTADO</th>
-            <th>MRR</th><th>EMAIL</th><th>TEL</th><th>REGISTRO</th><th>BOT</th>
-          </tr></thead>
+          <thead>
+            <tr>
+              <th>EMPRESA</th><th>RUT</th><th>PLAN</th><th>ESTADO</th><th>MRR</th><th>EMAIL</th><th>TEL</th><th>REGISTRO</th><th>BOT</th>
+            </tr>
+          </thead>
           <tbody>
             {filtered.map((client) => (
               <tr key={client.id}>
