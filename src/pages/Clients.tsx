@@ -34,7 +34,7 @@ const fmtDate = (d: string) =>
 interface Props {
   clients: Client[]
   onRefresh: () => void
-  onViewBot: (clientId: string, clientName: string) => void
+  onViewBot?: (clientId: string, clientName: string) => void
   showHeader?: boolean
 }
 
@@ -164,28 +164,32 @@ export default function Clients({ clients, onRefresh, onViewBot, showHeader }: P
                   {fmtDate(client.created_at)}
                 </td>
                 <td>
-  <button
-    onClick={() => onViewBot(client.id, client.business_name)}
-    style={{ fontSize: 12, padding: '4px 10px', cursor: 'pointer' }}
-  >
-    📊 Bot
-  </button>
-</td>
-                <td>
-                  <button
-                    onClick={() => onViewBot(client.id, client.business_name)}
-                    className="btn btn-secondary"
-                    style={{ fontSize: 12, padding: '4px 10px', whiteSpace: 'nowrap' }}
-                    title="Ver métricas del bot"
-                  >
-                    📊 Bot
-                  </button>
+                  {onViewBot && (
+                    <button
+                      onClick={() => onViewBot(client.id, client.business_name)}
+                      style={{
+                        fontSize: 12,
+                        padding: '4px 10px',
+                        cursor: 'pointer',
+                        background: '#059669',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: 6,
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      📊 Bot
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={9} style={{ textAlign: 'center', padding: 48, color: '#9ca3af' }}>
+                <td
+                  colSpan={9}
+                  style={{ textAlign: 'center', padding: 48, color: '#9ca3af' }}
+                >
                   Sin resultados
                 </td>
               </tr>
