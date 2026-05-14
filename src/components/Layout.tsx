@@ -19,6 +19,7 @@ export default function Layout({ session, children, currentPage, onNavigate }: P
   const navItems = [
     { id: 'dashboard', icon: '📊', label: 'Dashboard' },
     { id: 'clients', icon: '👥', label: 'Clientes' },
+    { id: 'onboarding', icon: '✨', label: 'Nuevo Cliente' },
     { id: 'billing', icon: '💳', label: 'Billing' },
     { id: 'automations', icon: '⚡', label: 'Automatizaciones' },
     { id: 'invoices', icon: '🧾', label: 'Facturas SII' },
